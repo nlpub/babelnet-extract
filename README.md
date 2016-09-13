@@ -35,7 +35,7 @@ The `synsets.txt` input file should be produced by the synset extraction action 
 
 ### Neighbourhood Extraction
 
-Given the set of synsets, extract the n-level ego network for each of them and write the tab separated file `neighbours.txt`, the path of which can be specified using the `-neighbours` option. Each neighbour has a distance provided with the plus sign if the neighbour is reachable through the hypernym, otherwise the minus sign is written.
+Given the set of synsets, extract the n-level ego network for each of them and write the tab separated file `neighbours.txt`, the path of which can be specified using the `-neighbours` option. Each neighbour has a distance provided with the plus sign if the neighbour is reachable through the hypernym, otherwise, the minus sign is written.
 
 ```bash
 java -jar target/babelnet-extract-1.0-SNAPSHOT.jar -action neighbours -synsets "synsets.txt" -depth 2 -neighbours "neighbours.txt"
@@ -46,7 +46,7 @@ The format of the `synsets.txt` input file is the same as in the sense extractio
 Building
 --------
 
-A couple of preliminary steps need to be done before building this application with Maven. Firsly, it is necessary to download and unpack the [BabelNet-API-3.7.zip](http://babelnet.org/data/3.7/BabelNet-API-3.7.zip) archive. Other versions than 3.7 might also work. Secondly, two dependencies, `jltutils` and `babelnet-api`, need to be installed to the local Maven repository as follows.
+A couple of preliminary steps needs to be done before building this application with Maven. Firstly, it is necessary to download and unpack the [BabelNet-API-3.7.zip](http://babelnet.org/data/3.7/BabelNet-API-3.7.zip) archive. Other versions than 3.7 might also work. Secondly, two dependencies, `jltutils` and `babelnet-api`, need to be installed to the local Maven repository as follows.
 
 ```bash
 mvn install:install-file -Dfile=lib/jltutils-2.2.jar -DgroupId=it.uniroma1.lcl.jlt -DartifactId=jltutils -Dversion=2.2 -Dpackaging=jar
