@@ -72,5 +72,6 @@ public class SynsetsAction {
         );
 
         writeRecords(synsetsFilename, allSynsets);
+        logger.log(Level.INFO, "Done");
     }
 }
