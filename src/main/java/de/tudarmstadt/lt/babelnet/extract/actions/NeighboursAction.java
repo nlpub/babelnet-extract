@@ -1,6 +1,5 @@
 package de.tudarmstadt.lt.babelnet.extract.actions;
 
-import de.tudarmstadt.lt.babelnet.extract.Resource;
 import it.uniroma1.lcl.babelnet.*;
 import it.uniroma1.lcl.babelnet.data.BabelPointer;
 
@@ -9,6 +8,7 @@ import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import static de.tudarmstadt.lt.babelnet.extract.Resource.readSynsets;
 import static de.tudarmstadt.lt.babelnet.extract.Resource.writeRecords;
 import static java.util.Collections.synchronizedList;
 import static java.util.stream.Collectors.joining;
@@ -31,7 +31,7 @@ public class NeighboursAction {
     }
 
     public void run() throws IOException {
-        final List<String> allSynsets = synchronizedList(Resource.readSynsets(synsetsFilename));
+        final List<String> allSynsets = synchronizedList(readSynsets(synsetsFilename));
 
         writeRecords(neighboursFilename, neighboursCSV ->
                 allSynsets.parallelStream().forEach(synsetID -> {

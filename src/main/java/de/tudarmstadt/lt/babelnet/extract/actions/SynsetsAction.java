@@ -1,6 +1,5 @@
 package de.tudarmstadt.lt.babelnet.extract.actions;
 
-import de.tudarmstadt.lt.babelnet.extract.Resource;
 import de.tudarmstadt.lt.babelnet.extract.data.Cluster;
 import it.uniroma1.lcl.babelnet.BabelNet;
 import it.uniroma1.lcl.babelnet.BabelSynset;
@@ -17,6 +16,7 @@ import java.util.concurrent.ConcurrentSkipListSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import static de.tudarmstadt.lt.babelnet.extract.Resource.readClusters;
 import static de.tudarmstadt.lt.babelnet.extract.Resource.writeRecords;
 import static java.util.Collections.synchronizedMap;
 import static java.util.stream.Collectors.joining;
@@ -39,7 +39,7 @@ public class SynsetsAction {
     }
 
     public void run() throws IOException {
-        final Map<Integer, Cluster> allClusters = synchronizedMap(Resource.readClusters(clustersFilename));
+        final Map<Integer, Cluster> allClusters = synchronizedMap(readClusters(clustersFilename));
         final Set<String> allSynsets = new ConcurrentSkipListSet<>();
 
         writeRecords(wordsFilename, csv ->
