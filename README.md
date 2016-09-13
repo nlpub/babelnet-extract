@@ -3,6 +3,11 @@ BabelNet Extract
 
 This program extracts certain data from the BabelNet lexical ontology. There are three modes available for synset, sense, and neighbourhood extraction, correspondingly. The data processing routines are implemented using multithreading, so they should scale well as long as the underlying storage allows.
 
+[![Build Status][travis_ci_badge]][travis_ci_link]
+
+[travis_ci_badge]: https://travis-ci.org/tudarmstadt-lt/babelnet-extract.svg
+[travis_ci_link]: https://travis-ci.org/tudarmstadt-lt/babelnet-extract
+
 Usage
 -----
 

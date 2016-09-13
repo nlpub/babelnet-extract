@@ -1,12 +1,14 @@
 language: java
 jdk:
 - oraclejdk8
+env:
+- BABELNET=3.7
 before_script:
 - mvn versions:display-dependency-updates versions:display-plugin-updates
-- wget 'http://babelnet.org/data/3.7/BabelNet-API-3.7.zip' && unzip BabelNet-API-3.7.zip
-- mvn install:install-file -Dfile=BabelNet-API-3.7/lib/jltutils-2.2.jar -DgroupId=it.uniroma1.lcl.jlt -DartifactId=jltutils -Dversion=2.2 -Dpackaging=jar
-- unzip -p BabelNet-API-3.7/babelnet-api-3.7.jar META-INF/maven/it.uniroma1.lcl.babelnet/babelnet-api/pom.xml | grep -vP '<(scope|systemPath)>' >BabelNet-API-3.7/babelnet-api-3.7.pom
-- mvn install:install-file -Dfile=BabelNet-API-3.7/babelnet-api-3.7.jar -DpomFile=babelnet-api-3.7.pom
+- wget 'http://babelnet.org/data/$BABELNET/BabelNet-API-$BABELNET.zip' && unzip BabelNet-API-$BABELNET.zip
+- mvn install:install-file -Dfile=BabelNet-API-$BABELNET/lib/jltutils-2.2.jar -DgroupId=it.uniroma1.lcl.jlt -DartifactId=jltutils -Dversion=2.2 -Dpackaging=jar
+- unzip -p BabelNet-API-$BABELNET/babelnet-api-$BABELNET.jar META-INF/maven/it.uniroma1.lcl.babelnet/babelnet-api/pom.xml | grep -vP '<(scope|systemPath)>' >BabelNet-API-$BABELNET/babelnet-api-$BABELNET.pom
+- mvn install:install-file -Dfile=BabelNet-API-$BABELNET/babelnet-api-$BABELNET.jar -DpomFile=babelnet-api-$BABELNET.pom
 cache:
   directories:
   - $HOME/.m2
