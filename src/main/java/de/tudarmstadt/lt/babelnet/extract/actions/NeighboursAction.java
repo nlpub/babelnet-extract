@@ -56,6 +56,8 @@ public class NeighboursAction {
                     }
                 })
         );
+
+        logger.log(Level.INFO, "Done");
     }
 
     private Map<String, Integer> walk(BabelSynset source) throws IOException {
