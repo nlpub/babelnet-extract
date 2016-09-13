@@ -57,5 +57,7 @@ public class SensesAction {
                     }
                 })
         );
+
+        logger.log(Level.INFO, "Done");
     }
 }
