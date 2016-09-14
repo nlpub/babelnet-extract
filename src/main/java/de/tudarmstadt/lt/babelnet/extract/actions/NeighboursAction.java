@@ -13,12 +13,26 @@ import static de.tudarmstadt.lt.babelnet.extract.Resource.writeRecords;
 import static java.util.Collections.synchronizedList;
 import static java.util.stream.Collectors.joining;
 
+/**
+ * The neighbours action extracts the n-level ego network for each of the given synsets.
+ *
+ * @author Dmitry Ustalov
+ */
 public class NeighboursAction {
     private final BabelNet babelnet;
     private final String synsetsFilename, neighboursFilename;
     private final int depth;
     private final Logger logger;
 
+    /**
+     * Initialize the action.
+     *
+     * @param babelnet the BabelNet instance.
+     * @param synsetsFilename the synsets input file.
+     * @param neighboursFilename the neighbours output file.
+     * @param depth the graph depth.
+     * @param logger the logger instance.
+     */
     public NeighboursAction(BabelNet babelnet, String synsetsFilename, String neighboursFilename, int depth, Logger logger) {
         this.babelnet = babelnet;
         this.synsetsFilename = synsetsFilename;
@@ -30,6 +44,11 @@ public class NeighboursAction {
         logger.log(Level.INFO, "Extracting in {0} steps", Integer.toString(depth));
     }
 
+    /**
+     * Process the data and write the outputs.
+     *
+     * @throws IOException when an I/O error has occurred.
+     */
     public void run() throws IOException {
         final List<String> allSynsets = synchronizedList(readSynsets(synsetsFilename));
 
@@ -60,6 +79,15 @@ public class NeighboursAction {
         logger.log(Level.INFO, "Done");
     }
 
+    /**
+     * Extract the graph ego network by walking the graph. The initial node is not included into the results.
+     * Each distance provided with the plus sign if the neighbour is reachable through the hypernym,
+     * otherwise, the minus sign is written.
+     *
+     * @param source the initial node.
+     * @return the mapping between the neighbours and their distances.
+     * @throws IOException
+     */
     private Map<String, Integer> walk(BabelSynset source) throws IOException {
         final Map<String, Integer> neighbours = new HashMap<>();
         neighbours.put(source.getId().toString(), 0);

@@ -22,11 +22,26 @@ import static java.util.Collections.synchronizedMap;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toSet;
 
+/**
+ * The synsets action extracts the list of synsets per given clusters and the list of the synsets containing
+ * the words in these clusters.
+ *
+ * @author Dmitry Ustalov
+ */
 public class SynsetsAction {
     private final BabelNet babelnet;
     private final String clustersFilename, wordsFilename, synsetsFilename;
     private final Logger logger;
 
+    /**
+     * Initialize the action.
+     *
+     * @param babelnet the BabelNet instance.
+     * @param clustersFilename the clusters input file.
+     * @param wordsFilename the words output file.
+     * @param synsetsFilename the synsets output file.
+     * @param logger the logger instance.
+     */
     public SynsetsAction(BabelNet babelnet, String clustersFilename, String wordsFilename, String synsetsFilename, Logger logger) {
         this.babelnet = babelnet;
         this.clustersFilename = clustersFilename;
@@ -38,6 +53,11 @@ public class SynsetsAction {
         logger.log(Level.INFO, "Writing synsets to \"{0}\"", synsetsFilename);
     }
 
+    /**
+     * Process the data and write the outputs.
+     *
+     * @throws IOException when an I/O error has occurred.
+     */
     public void run() throws IOException {
         final Map<Integer, Cluster> allClusters = synchronizedMap(readClusters(clustersFilename));
         final Set<String> allSynsets = new ConcurrentSkipListSet<>();

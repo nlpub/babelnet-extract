@@ -14,7 +14,21 @@ import java.util.function.Function;
 
 import static java.util.stream.Collectors.toList;
 
+/**
+ * An interface containing the input/output routines used by other classes.
+ *
+ * @author Dmitry Ustalov
+ */
 public interface Resource {
+    /**
+     * Open the specified file for reading and pass the CSV parser to the given function once.
+     *
+     * @param filename the file to read.
+     * @param f the function to pass the parser.
+     * @param <R> the return type of the given function.
+     * @return the return value of the given function.
+     * @throws IOException when an I/O error has occurred.
+     */
     static <R> R readRecords(String filename, Function<CSVParser, R> f) throws IOException {
         try (final InputStream stream = new FileInputStream(filename);
              final Reader reader = new InputStreamReader(stream, StandardCharsets.UTF_8);
@@ -23,6 +37,13 @@ public interface Resource {
         }
     }
 
+    /**
+     * Open the Chinese Whispers clusters file and parse the records.
+     *
+     * @param filename the file to read.
+     * @return the mapping between a set of cluster IDs and their representations.
+     * @throws IOException when an I/O error has occurred.
+     */
     static Map<Integer, Cluster> readClusters(String filename) throws IOException {
         return readRecords(filename, csv -> {
             final Map<Integer, Cluster> map = new HashMap<>();
@@ -35,6 +56,13 @@ public interface Resource {
         });
     }
 
+    /**
+     * Parse the synset list.
+     *
+     * @param filename the file to read.
+     * @return the list of synset IDs.
+     * @throws IOException when an I/O error has occurred.
+     */
     static List<String> readSynsets(String filename) throws IOException {
         return readRecords(filename, csv -> {
             try {
@@ -45,6 +73,13 @@ public interface Resource {
         });
     }
 
+    /**
+     * Open the specified class for writing and pass the CSV printer to the given consumer once.
+     *
+     * @param filename the file to write.
+     * @param f the consumer to pass the printer.
+     * @throws IOException when an I/O error has occurred.
+     */
     static void writeRecords(String filename, Consumer<CSVPrinter> f) throws IOException {
         try (final OutputStream stream = new FileOutputStream(filename);
              final Writer writer = new OutputStreamWriter(stream, StandardCharsets.UTF_8);
@@ -53,6 +88,13 @@ public interface Resource {
         }
     }
 
+    /**
+     * Open the specified class for writing the given string collection.
+     *
+     * @param filename the file to write.
+     * @param records the collection of strings to write to the file.
+     * @throws IOException when an I/O error has occurred.
+     */
     static void writeRecords(String filename, Collection<String> records) throws IOException {
         writeRecords(filename, csv -> {
             try {

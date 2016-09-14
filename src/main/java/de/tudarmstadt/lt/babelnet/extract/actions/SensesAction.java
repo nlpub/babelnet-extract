@@ -16,11 +16,24 @@ import static java.util.Collections.synchronizedList;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toMap;
 
+/**
+ * The senses action extracts the corresponding sense lemmas and their frequencies.
+ *
+ * @author Dmitry Ustalov
+ */
 public class SensesAction {
     private final BabelNet babelnet;
     private final String synsetsFilename, sensesFilename;
     private final Logger logger;
 
+    /**
+     * Initialize the action.
+     *
+     * @param babelnet the BabelNet instance.
+     * @param synsetsFilename the synsets input file.
+     * @param sensesFilename the senses output file.
+     * @param logger the logger instance.
+     */
     public SensesAction(BabelNet babelnet, String synsetsFilename, String sensesFilename, Logger logger) {
         this.babelnet = babelnet;
         this.synsetsFilename = synsetsFilename;
@@ -30,6 +43,11 @@ public class SensesAction {
         logger.log(Level.INFO, "Writing senses to \"{0}\"", sensesFilename);
     }
 
+    /**
+     * Process the data and write the outputs.
+     *
+     * @throws IOException when an I/O error has occurred.
+     */
     public void run() throws IOException {
         final List<String> allSynsets = synchronizedList(readSynsets(synsetsFilename));
 

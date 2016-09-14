@@ -10,7 +10,18 @@ import java.io.IOException;
 import java.util.Objects;
 import java.util.logging.Logger;
 
-class Application {
+/**
+ * BabelNet Extract is an application for extracting certain data from the BabelNet lexical ontology.
+ *
+ * @author Dmitry Ustalov
+ */
+abstract class Application {
+    /**
+     * This is the program entry point that parses the command line arguments and runs the specified actions.
+     *
+     * @param args the command line arguments.
+     * @throws IOException when an I/O error has occurred.
+     */
     public static void main(String[] args) throws IOException {
         final CommandLineParser parser = new DefaultParser();
 
