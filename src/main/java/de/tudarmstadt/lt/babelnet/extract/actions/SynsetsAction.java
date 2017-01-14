@@ -30,20 +30,26 @@ import static java.util.stream.Collectors.toSet;
  */
 public class SynsetsAction {
     private final BabelNet babelnet;
+    private final Language language;
+    private final BabelPOS pos;
     private final String clustersFilename, wordsFilename, synsetsFilename;
     private final Logger logger;
 
     /**
      * Initialize the action.
      *
-     * @param babelnet the BabelNet instance.
+     * @param babelnet         the BabelNet instance.
+     * @param language         the language.
+     * @param pos              the part of speech.
      * @param clustersFilename the clusters input file.
-     * @param wordsFilename the words output file.
-     * @param synsetsFilename the synsets output file.
-     * @param logger the logger instance.
+     * @param wordsFilename    the words output file.
+     * @param synsetsFilename  the synsets output file.
+     * @param logger           the logger instance.
      */
-    public SynsetsAction(BabelNet babelnet, String clustersFilename, String wordsFilename, String synsetsFilename, Logger logger) {
+    public SynsetsAction(BabelNet babelnet, Language language, BabelPOS pos, String clustersFilename, String wordsFilename, String synsetsFilename, Logger logger) {
         this.babelnet = babelnet;
+        this.language = language;
+        this.pos = pos;
         this.clustersFilename = clustersFilename;
         this.wordsFilename = wordsFilename;
         this.synsetsFilename = synsetsFilename;
@@ -69,7 +75,7 @@ public class SynsetsAction {
                         final Map<String, Collection<String>> synsets = new HashMap<>();
                         for (final String lemma : cluster.getLemmas()) {
                             final Collection<String> lemmaSynsets = babelnet.
-                                    getSynsets(lemma, Language.EN, BabelPOS.NOUN).stream().
+                                    getSynsets(lemma, language, pos).stream().
                                     map(BabelSynset::getId).map(BabelSynsetID::toString).
                                     collect(toSet());
                             synsets.put(lemma, lemmaSynsets);

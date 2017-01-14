@@ -1,6 +1,8 @@
 package de.tudarmstadt.lt.babelnet.extract;
 
 import de.tudarmstadt.lt.babelnet.extract.data.Cluster;
+import it.uniroma1.lcl.babelnet.data.BabelPOS;
+import it.uniroma1.lcl.jlt.util.Language;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVPrinter;
@@ -11,6 +13,8 @@ import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
 
@@ -21,11 +25,21 @@ import static java.util.stream.Collectors.toList;
  */
 public interface Resource {
     /**
+     * The map of available languages in BabelNet.
+     */
+    Map<String, Language> LANGUAGES = Stream.of(Language.values()).collect(Collectors.toMap(l -> l.getName().toLowerCase(), Function.identity()));
+
+    /**
+     * The map of available parts of speech in BabelNet.
+     */
+    Map<String, BabelPOS> POS = Stream.of(BabelPOS.values()).collect(Collectors.toMap(p -> String.valueOf(p.getTag()), Function.identity()));
+
+    /**
      * Open the specified file for reading and pass the CSV parser to the given function once.
      *
      * @param filename the file to read.
-     * @param f the function to pass the parser.
-     * @param <R> the return type of the given function.
+     * @param f        the function to pass the parser.
+     * @param <R>      the return type of the given function.
      * @return the return value of the given function.
      * @throws IOException when an I/O error has occurred.
      */
@@ -77,7 +91,7 @@ public interface Resource {
      * Open the specified class for writing and pass the CSV printer to the given consumer once.
      *
      * @param filename the file to write.
-     * @param f the consumer to pass the printer.
+     * @param f        the consumer to pass the printer.
      * @throws IOException when an I/O error has occurred.
      */
     static void writeRecords(String filename, Consumer<CSVPrinter> f) throws IOException {
@@ -92,7 +106,7 @@ public interface Resource {
      * Open the specified class for writing the given string collection.
      *
      * @param filename the file to write.
-     * @param records the collection of strings to write to the file.
+     * @param records  the collection of strings to write to the file.
      * @throws IOException when an I/O error has occurred.
      */
     static void writeRecords(String filename, Collection<String> records) throws IOException {

@@ -27,11 +27,11 @@ public class NeighboursAction {
     /**
      * Initialize the action.
      *
-     * @param babelnet the BabelNet instance.
-     * @param synsetsFilename the synsets input file.
+     * @param babelnet           the BabelNet instance.
+     * @param synsetsFilename    the synsets input file.
      * @param neighboursFilename the neighbours output file.
-     * @param depth the graph depth.
-     * @param logger the logger instance.
+     * @param depth              the graph depth.
+     * @param logger             the logger instance.
      */
     public NeighboursAction(BabelNet babelnet, String synsetsFilename, String neighboursFilename, int depth, Logger logger) {
         this.babelnet = babelnet;

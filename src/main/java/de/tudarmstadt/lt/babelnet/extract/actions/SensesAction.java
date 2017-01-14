@@ -23,19 +23,22 @@ import static java.util.stream.Collectors.toMap;
  */
 public class SensesAction {
     private final BabelNet babelnet;
+    private final Language language;
     private final String synsetsFilename, sensesFilename;
     private final Logger logger;
 
     /**
      * Initialize the action.
      *
-     * @param babelnet the BabelNet instance.
+     * @param babelnet        the BabelNet instance.
+     * @param language        the language.
      * @param synsetsFilename the synsets input file.
-     * @param sensesFilename the senses output file.
-     * @param logger the logger instance.
+     * @param sensesFilename  the senses output file.
+     * @param logger          the logger instance.
      */
-    public SensesAction(BabelNet babelnet, String synsetsFilename, String sensesFilename, Logger logger) {
+    public SensesAction(BabelNet babelnet, Language language, String synsetsFilename, String sensesFilename, Logger logger) {
         this.babelnet = babelnet;
+        this.language = language;
         this.synsetsFilename = synsetsFilename;
         this.sensesFilename = sensesFilename;
         this.logger = logger;
@@ -55,7 +58,7 @@ public class SensesAction {
                 allSynsets.parallelStream().forEach(synsetID -> {
                     try {
                         final BabelSynset synset = babelnet.getSynset(new BabelSynsetID(synsetID));
-                        final Map<String, Integer> senses = synset.getSenses(Language.EN).stream().
+                        final Map<String, Integer> senses = synset.getSenses(language).stream().
                                 collect(toMap(sense -> sense.getSimpleLemma().replaceAll("_", " "),
                                         BabelSense::getFrequency,
                                         (v1, v2) -> v1,

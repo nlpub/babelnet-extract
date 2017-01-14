@@ -4,6 +4,8 @@ import de.tudarmstadt.lt.babelnet.extract.actions.NeighboursAction;
 import de.tudarmstadt.lt.babelnet.extract.actions.SensesAction;
 import de.tudarmstadt.lt.babelnet.extract.actions.SynsetsAction;
 import it.uniroma1.lcl.babelnet.BabelNet;
+import it.uniroma1.lcl.babelnet.data.BabelPOS;
+import it.uniroma1.lcl.jlt.util.Language;
 import org.apache.commons.cli.*;
 
 import java.io.IOException;
@@ -33,6 +35,8 @@ abstract class Application {
         options.addOption(Option.builder("neighbours").argName("neighbours").hasArg().build());
         options.addOption(Option.builder("senses").argName("senses").hasArg().build());
         options.addOption(Option.builder("depth").argName("depth").hasArg().build());
+        options.addOption(Option.builder("language").argName("language").hasArg().build());
+        options.addOption(Option.builder("pos").argName("pos").hasArg().build());
 
         CommandLine cmd = null;
         try {
@@ -49,11 +53,13 @@ abstract class Application {
         final Logger logger = Logger.getLogger("BabelNet");
         switch (action) {
             case "synsets": {
+                final Language language = Resource.LANGUAGES.get(cmd.getOptionValue("language", "EN").toLowerCase());
+                final BabelPOS pos = Resource.POS.get(cmd.getOptionValue("pos", "n").toLowerCase());
                 final String clustersFilename = Objects.requireNonNull(cmd.getOptionValue("clusters"),
                         "-clusters needs to be specified");
                 final String wordsFilename = cmd.getOptionValue("words", "synsets.txt");
                 final String synsetsFilename = cmd.getOptionValue("synsets", "synsets.txt");
-                new SynsetsAction(babelnet, clustersFilename, wordsFilename, synsetsFilename, logger).run();
+                new SynsetsAction(babelnet, language, pos, clustersFilename, wordsFilename, synsetsFilename, logger).run();
                 break;
             }
             case "neighbours": {
@@ -65,10 +71,11 @@ abstract class Application {
                 break;
             }
             case "senses": {
+                final Language language = Resource.LANGUAGES.get(cmd.getOptionValue("language", "EN").toLowerCase());
                 final String synsetsFilename = Objects.requireNonNull(cmd.getOptionValue("synsets"),
                         "-synsets needs to be specified");
                 final String sensesFilename = cmd.getOptionValue("senses", "senses.txt");
-                new SensesAction(babelnet, synsetsFilename, sensesFilename, logger).run();
+                new SensesAction(babelnet, language, synsetsFilename, sensesFilename, logger).run();
                 break;
             }
             default:
