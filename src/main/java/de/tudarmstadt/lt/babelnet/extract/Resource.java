@@ -14,7 +14,6 @@ import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
 
@@ -27,12 +26,12 @@ public interface Resource {
     /**
      * The map of available languages in BabelNet.
      */
-    Map<String, Language> LANGUAGES = Stream.of(Language.values()).collect(Collectors.toMap(l -> l.getName().toLowerCase(), Function.identity()));
+    Map<String, Language> LANGUAGES = EnumSet.allOf(Language.class).stream().collect(Collectors.toMap(l -> l.toString().toLowerCase(), Function.identity()));
 
     /**
      * The map of available parts of speech in BabelNet.
      */
-    Map<String, BabelPOS> POS = Stream.of(BabelPOS.values()).collect(Collectors.toMap(p -> String.valueOf(p.getTag()), Function.identity()));
+    Map<String, BabelPOS> POS = EnumSet.allOf(BabelPOS.class).stream().collect(Collectors.toMap(p -> p.toString().toLowerCase(), Function.identity()));
 
     /**
      * Open the specified file for reading and pass the CSV parser to the given function once.

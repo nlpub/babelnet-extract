@@ -54,8 +54,8 @@ abstract class Application {
         final Logger logger = Logger.getLogger("BabelNet");
         switch (action) {
             case "clusters": {
-                final Language language = Resource.LANGUAGES.get(cmd.getOptionValue("language", "EN").toLowerCase());
-                final BabelPOS pos = Resource.POS.get(cmd.getOptionValue("pos", "n").toLowerCase());
+                final Language language = Objects.requireNonNull(Resource.LANGUAGES.get(cmd.getOptionValue("language", "EN").toLowerCase()));
+                final BabelPOS pos = Objects.requireNonNull(Resource.POS.get(cmd.getOptionValue("pos", "noun").toLowerCase()));
                 final String clustersFilename = Objects.requireNonNull(cmd.getOptionValue("clusters"),
                         "-clusters needs to be specified");
                 final String wordsFilename = cmd.getOptionValue("words", "synsets.txt");
@@ -72,7 +72,7 @@ abstract class Application {
                 break;
             }
             case "senses": {
-                final Language language = Resource.LANGUAGES.get(cmd.getOptionValue("language", "EN").toLowerCase());
+                final Language language = Objects.requireNonNull(Resource.LANGUAGES.get(cmd.getOptionValue("language", "EN").toLowerCase()));
                 final String synsetsFilename = Objects.requireNonNull(cmd.getOptionValue("synsets"),
                         "-synsets needs to be specified");
                 final String sensesFilename = cmd.getOptionValue("senses", "senses.txt");
@@ -80,7 +80,7 @@ abstract class Application {
                 break;
             }
             case "synsets": {
-                final Language language = Resource.LANGUAGES.get(cmd.getOptionValue("language", "EN").toLowerCase());
+                final Language language = Objects.requireNonNull(Resource.LANGUAGES.get(cmd.getOptionValue("language", "EN").toLowerCase()));
                 final String synsetsFilename = cmd.getOptionValue("synsets", "synsets.txt");
                 new SynsetsAction(babelnet, language, synsetsFilename, logger).run();
                 break;
