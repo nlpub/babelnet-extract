@@ -48,6 +48,16 @@ java -jar target/babelnet-extract.jar -action neighbours -synsets "synsets.txt" 
 
 The format of the `synsets.txt` input file is the same as in the sense extraction action.
 
+### Synset Extraction
+
+This action writes the file `synsets.txt` representing the BabelNet synsets for the given language specified using the `-language` option.
+
+```bash
+java -jar target/babelnet-extract.jar -action synsets -synsets "synsets.txt" -language ru
+```
+
+The format of the `synsets.txt` output file is the same as the format of the `clusters.txt` file in the cluster extraction action.
+
 Building
 --------
 
