@@ -3,6 +3,7 @@ package de.tudarmstadt.lt.babelnet.extract;
 import de.tudarmstadt.lt.babelnet.extract.actions.ClustersAction;
 import de.tudarmstadt.lt.babelnet.extract.actions.NeighboursAction;
 import de.tudarmstadt.lt.babelnet.extract.actions.SensesAction;
+import de.tudarmstadt.lt.babelnet.extract.actions.SynsetsAction;
 import it.uniroma1.lcl.babelnet.BabelNet;
 import it.uniroma1.lcl.babelnet.data.BabelPOS;
 import it.uniroma1.lcl.jlt.util.Language;
@@ -76,6 +77,12 @@ abstract class Application {
                         "-synsets needs to be specified");
                 final String sensesFilename = cmd.getOptionValue("senses", "senses.txt");
                 new SensesAction(babelnet, language, synsetsFilename, sensesFilename, logger).run();
+                break;
+            }
+            case "synsets": {
+                final Language language = Resource.LANGUAGES.get(cmd.getOptionValue("language", "EN").toLowerCase());
+                final String synsetsFilename = cmd.getOptionValue("synsets", "synsets.txt");
+                new SynsetsAction(babelnet, language, synsetsFilename, logger).run();
                 break;
             }
             default:
