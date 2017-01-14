@@ -23,12 +23,12 @@ import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toSet;
 
 /**
- * The synsets action extracts the list of synsets per given clusters and the list of the synsets containing
+ * The clusters action extracts the list of synsets per given clusters and the list of the synsets containing
  * the words in these clusters.
  *
  * @author Dmitry Ustalov
  */
-public class SynsetsAction {
+public class ClustersAction {
     private final BabelNet babelnet;
     private final Language language;
     private final BabelPOS pos;
@@ -46,7 +46,7 @@ public class SynsetsAction {
      * @param synsetsFilename  the synsets output file.
      * @param logger           the logger instance.
      */
-    public SynsetsAction(BabelNet babelnet, Language language, BabelPOS pos, String clustersFilename, String wordsFilename, String synsetsFilename, Logger logger) {
+    public ClustersAction(BabelNet babelnet, Language language, BabelPOS pos, String clustersFilename, String wordsFilename, String synsetsFilename, Logger logger) {
         this.babelnet = babelnet;
         this.language = language;
         this.pos = pos;

@@ -1,8 +1,8 @@
 package de.tudarmstadt.lt.babelnet.extract;
 
+import de.tudarmstadt.lt.babelnet.extract.actions.ClustersAction;
 import de.tudarmstadt.lt.babelnet.extract.actions.NeighboursAction;
 import de.tudarmstadt.lt.babelnet.extract.actions.SensesAction;
-import de.tudarmstadt.lt.babelnet.extract.actions.SynsetsAction;
 import it.uniroma1.lcl.babelnet.BabelNet;
 import it.uniroma1.lcl.babelnet.data.BabelPOS;
 import it.uniroma1.lcl.jlt.util.Language;
@@ -52,14 +52,14 @@ abstract class Application {
         final BabelNet babelnet = BabelNet.getInstance();
         final Logger logger = Logger.getLogger("BabelNet");
         switch (action) {
-            case "synsets": {
+            case "clusters": {
                 final Language language = Resource.LANGUAGES.get(cmd.getOptionValue("language", "EN").toLowerCase());
                 final BabelPOS pos = Resource.POS.get(cmd.getOptionValue("pos", "n").toLowerCase());
                 final String clustersFilename = Objects.requireNonNull(cmd.getOptionValue("clusters"),
                         "-clusters needs to be specified");
                 final String wordsFilename = cmd.getOptionValue("words", "synsets.txt");
                 final String synsetsFilename = cmd.getOptionValue("synsets", "synsets.txt");
-                new SynsetsAction(babelnet, language, pos, clustersFilename, wordsFilename, synsetsFilename, logger).run();
+                new ClustersAction(babelnet, language, pos, clustersFilename, wordsFilename, synsetsFilename, logger).run();
                 break;
             }
             case "neighbours": {

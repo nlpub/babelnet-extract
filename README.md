@@ -13,12 +13,12 @@ Usage
 
 For running this program Java 8 and Maven 3 are required among the working BabelNet [Java API](http://babelnet.org/download) setup. The BabelNet API configuration files should be located in the working directory from which the program is run.
 
-### Synset Extraction
+### Cluster Extraction
 
 Given the set of word sense clusters, this action writes two files: `words.txt` with the list of synsets per clusters, and `synsets.txt` with the list of the synsets containing the input words. The paths of both output files can be specified using the `-words` and `-synsets` options, correspondingly.
 
 ```bash
-java -jar target/babelnet-extract.jar -action synsets -clusters "clusters.txt" -words "words.txt" -synsets "synsets.txt"
+java -jar target/babelnet-extract.jar -action clusters -clusters "clusters.txt" -words "words.txt" -synsets "synsets.txt"
 ```
 
 The `clusters.txt` input file should be formatted according to the Chinese Whispers [program](https://github.com/tudarmstadt-lt/chinese-whispers) tab separated output format `cluster<TAB>size<TAB>senses` as follows. Note that the sense labels like `#1`, `#2` and `#3` are ignored by the parser.
