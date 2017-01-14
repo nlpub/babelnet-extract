@@ -54,7 +54,6 @@ public class SynsetsAction {
                     if (senses.isEmpty()) return;
 
                     final String synsetID = synset.getId().toString();
-                    logger.log(Level.INFO, "Extracting {0}", synsetID);
 
                     final Set<String> lemmas = senses.stream().map(BabelSense::getSimpleLemma).collect(toSet());
                     csv.printRecord(synsetID, lemmas.size(), lemmas.stream().collect(joining(", ")));
