@@ -1,0 +1,6 @@
+version: '2'
+services:
+  babelnet:
+    build: .
+    volumes:
+    - './BabelNet-3.7:/babelnet/index'
