@@ -32,9 +32,11 @@ rm -fv master.zip && \
 mv -fv babelnet-extract-master /babelnet/extract && \
 cd /babelnet/extract && \
 mvn package && \
+mv /babelnet/extract/target/babelnet-extract.jar /babelnet/extract/babelnet-extract.jar && \
+mvn clean && \
 ln -sfT /babelnet/config /babelnet/extract/config && \
 ln -sfT /babelnet/resources /babelnet/extract/resources && \
-echo '#!/bin/sh\njava -jar /babelnet/extract/target/babelnet-extract.jar $@' >/bin/babelnet-extract && \
+echo '#!/bin/sh\njava -jar /babelnet/extract/babelnet-extract.jar $@' >/bin/babelnet-extract && \
 chmod +x /bin/babelnet-extract
 
 WORKDIR /babelnet
