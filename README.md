@@ -21,7 +21,7 @@ Given the set of word sense clusters, this action writes two files: `words.txt` 
 java -jar target/babelnet-extract.jar -action clusters -clusters "clusters.txt" -words "words.txt" -synsets "synsets.txt"
 ```
 
-The `clusters.txt` input file should be formatted according to the Chinese Whispers [program](https://github.com/tudarmstadt-lt/chinese-whispers) tab separated output format `cluster<TAB>size<TAB>senses` as follows. Note that the sense labels like `#1`, `#2` and `#3` are ignored by the parser.
+The `clusters.txt` input file should be formatted according to the Chinese Whispers [program](https://github.com/uhh/chinese-whispers) tab separated output format `cluster<TAB>size<TAB>senses` as follows. Note that the sense labels like `#1`, `#2` and `#3` are ignored by the parser.
 
 ```
 0	2	word#1, word#2
@@ -78,7 +78,7 @@ Other versions than BabelNet API 3.7 might also work, it is sufficient just to c
 
 ## Docker
 
-This is an unofficial Docker image containing [BabelNet Java API](http://babelnet.org/download) and [BabelNet Extract](https://github.com/tudarmstadt-lt/babelnet-extract) properly set up.
+This is an unofficial Docker image containing [BabelNet Java API](http://babelnet.org/download) and [BabelNet Extract](https://github.com/nlpub/babelnet-extract) properly set up.
 
 ### Data
 
@@ -94,4 +94,4 @@ docker run --rm -it -v './BabelNet-3.7:/babelnet/index' -v './output:/babelnet/o
 
 ### Copyright
 
-[BabelNet](http://babelnet.org/) and its API are licensed under a [CC BY-NC-SA 3.0](https://creativecommons.org/licenses/by-nc-sa/3.0/) license. [BabelNet Extract](https://github.com/tudarmstadt-lt/babelnet-extract) is licensed under the Apache License 2.0.
+[BabelNet](http://babelnet.org/) and its API are licensed under a [CC BY-NC-SA 3.0](https://creativecommons.org/licenses/by-nc-sa/3.0/) license. [BabelNet Extract](https://github.com/nlpub/babelnet-extract) is licensed under the Apache License 2.0.
