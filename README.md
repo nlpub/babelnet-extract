@@ -61,7 +61,7 @@ The format of the `synsets.txt` output file is the same as the format of the `cl
 Building
 --------
 
-A couple of preliminary steps needs to be done before building this application with Maven. Firstly, it is necessary to download and unpack the [BabelNet-API-3.7.zip](http://babelnet.org/data/3.7/BabelNet-API-3.7.zip) archive. Secondly, two dependencies, `jltutils` and `babelnet-api`, need to be installed to the local Maven repository as follows.
+A couple of preliminary steps needs to be done before building this application with Maven. Firstly, it is necessary to download and unpack the [BabelNet-API-3.7.zip](https://github.com/nlpub/babelnet-extract/releases/download/bn37/BabelNet-API-3.7.zip) archive. Secondly, two dependencies, `jltutils` and `babelnet-api`, need to be installed to the local Maven repository as follows.
 
 ```bash
 mvn install:install-file -Dfile=lib/jltutils-2.2.jar -DgroupId=it.uniroma1.lcl.jlt -DartifactId=jltutils -Dversion=2.2 -Dpackaging=jar
