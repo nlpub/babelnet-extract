@@ -21,7 +21,7 @@ Given the set of word sense clusters, this action writes two files: `words.txt` 
 java -jar target/babelnet-extract.jar -action clusters -clusters "clusters.txt" -words "words.txt" -synsets "synsets.txt"
 ```
 
-The `clusters.txt` input file should be formatted according to the Chinese Whispers [program](https://github.com/uhh/chinese-whispers) tab separated output format `cluster<TAB>size<TAB>senses` as follows. Note that the sense labels like `#1`, `#2` and `#3` are ignored by the parser.
+The `clusters.txt` input file should be formatted according to the Chinese Whispers [program](https://github.com/uhh-lt/chinese-whispers) tab separated output format `cluster<TAB>size<TAB>senses` as follows. Note that the sense labels like `#1`, `#2` and `#3` are ignored by the parser.
 
 ```
 0	2	word#1, word#2
