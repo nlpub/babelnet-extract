@@ -3,10 +3,12 @@ BabelNet Extract
 
 This program extracts certain data from the [BabelNet](http://babelnet.org/) lexical ontology. There are three actions implemented for synset, sense, and neighbourhood extraction, correspondingly. The data processing routines are implemented using multithreading, so they should scale well as long as the underlying storage allows it.
 
-[![Build Status][travis_ci_badge]][travis_ci_link]
+[![Build Status][travis_ci_badge]][travis_ci_link] [![Docker Hub][docker_badge]][docker_link]
 
-[travis_ci_badge]: https://travis-ci.org/tudarmstadt-lt/babelnet-extract.svg
-[travis_ci_link]: https://travis-ci.org/tudarmstadt-lt/babelnet-extract
+[travis_ci_badge]: https://travis-ci.org/nlpub/babelnet-extract.svg
+[travis_ci_link]: https://travis-ci.org/nlpub/babelnet-extract
+[docker_badge]: https://img.shields.io/docker/pulls/nlpub/babelnet.svg
+[docker_link]: https://hub.docker.com/r/nlpub/babelnet/
 
 Usage
 -----
