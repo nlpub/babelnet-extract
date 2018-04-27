@@ -14,7 +14,7 @@ rm -rf /var/lib/apt/lists/*
 
 RUN \
 mkdir -p $MAVEN_CONFIG && \
-wget -q "http://babelnet.org/data/$BABELNET/BabelNet-API-$BABELNET.zip" && \
+wget -q "https://github.com/nlpub/babelnet-extract/releases/download/bn37/BabelNet-API-$BABELNET.zip" && \
 unzip BabelNet-API-$BABELNET.zip && \
 rm -fv BabelNet-API-$BABELNET.zip && \
 mv -fv BabelNet-API-$BABELNET /babelnet && \
@@ -26,7 +26,7 @@ sed -re 's|^# babelnet.dir=.*$|babelnet.dir=/babelnet/index|' -i /babelnet/confi
 ln -sf /usr/share/wordnet /opt/WordNet/dict
 
 RUN \
-wget -q "https://github.com/tudarmstadt-lt/babelnet-extract/archive/master.zip" && \
+wget -q "https://github.com/nlpub/babelnet-extract/archive/master.zip" && \
 unzip master.zip && \
 rm -fv master.zip && \
 mv -fv babelnet-extract-master /babelnet/extract && \
