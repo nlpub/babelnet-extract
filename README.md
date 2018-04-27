@@ -1,5 +1,4 @@
-BabelNet Extract
-================
+# BabelNet Extract
 
 This program extracts certain data from the [BabelNet](http://babelnet.org/) lexical ontology. There are three actions implemented for synset, sense, and neighbourhood extraction, correspondingly. The data processing routines are implemented using multithreading, so they should scale well as long as the underlying storage allows it.
 
@@ -10,8 +9,7 @@ This program extracts certain data from the [BabelNet](http://babelnet.org/) lex
 [docker_badge]: https://img.shields.io/docker/pulls/nlpub/babelnet.svg
 [docker_link]: https://hub.docker.com/r/nlpub/babelnet/
 
-Usage
------
+## Usage
 
 For running this program Java 8 and Maven 3 are required among the working BabelNet [Java API](http://babelnet.org/download) setup. The BabelNet API configuration files should be located in the working directory from which the program is run.
 
@@ -60,8 +58,7 @@ java -jar target/babelnet-extract.jar -action synsets -synsets "synsets.txt" -la
 
 The format of the `synsets.txt` output file is the same as the format of the `clusters.txt` file in the cluster extraction action.
 
-Building
---------
+## Building
 
 A couple of preliminary steps needs to be done before building this application with Maven. Firstly, it is necessary to download and unpack the [BabelNet-API-3.7.zip](https://github.com/nlpub/babelnet-extract/releases/download/bn37/BabelNet-API-3.7.zip) archive. Secondly, two dependencies, `jltutils` and `babelnet-api`, need to be installed to the local Maven repository as follows.
 
@@ -78,3 +75,23 @@ mvn package
 ```
 
 Other versions than BabelNet API 3.7 might also work, it is sufficient just to change the version value of the necessary BabelNet version in `pom.xml`.
+
+## Docker
+
+This is an unofficial Docker image containing [BabelNet Java API](http://babelnet.org/download) and [BabelNet Extract](https://github.com/tudarmstadt-lt/babelnet-extract) properly set up.
+
+### Data
+
+This image has been designed with an assumption that the BabelNet offline index should be mounted as volume to the `/babelnet/index` directory.
+
+In case SELinux is enabled, please update the BabelNet index security context: `chcon -Rt svirt_sandbox_file_t BABELNET_PATH`.
+
+### Usage
+
+```bash
+docker run --rm -it -v './BabelNet-3.7:/babelnet/index' -v './output:/babelnet/output' nlpub/babelnet babelnet-extract
+```
+
+### Copyright
+
+[BabelNet](http://babelnet.org/) and its API are licensed under a [CC BY-NC-SA 3.0](https://creativecommons.org/licenses/by-nc-sa/3.0/) license. [BabelNet Extract](https://github.com/tudarmstadt-lt/babelnet-extract) is licensed under the Apache License 2.0.
