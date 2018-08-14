@@ -78,13 +78,17 @@ Other versions than BabelNet API 3.7 might also work, it is sufficient just to c
 
 ## Docker
 
-This is an unofficial Docker image containing [BabelNet Java API](http://babelnet.org/download) and [BabelNet Extract](https://github.com/nlpub/babelnet-extract) properly set up.
+There is an *unofficial* Docker image containing [BabelNet Java API](http://babelnet.org/download) and [BabelNet Extract](https://github.com/nlpub/babelnet-extract) properly set up.
 
 ### Data
 
-This image has been designed with an assumption that the BabelNet offline index should be mounted as volume to the `/babelnet/index` directory.
+This image has been designed with an assumption that the BabelNet offline index is mounted as volume to the `/babelnet/index` directory.
+
+### Troubleshooting
 
 In case SELinux is enabled, please update the BabelNet index security context: `chcon -Rt svirt_sandbox_file_t BABELNET_PATH`.
+
+In case of DNS-related problems, try adding a resolver manually to `Dockerfile`: `chmod o+r /etc/resolv.conf && echo "nameserver 208.67.222.222" >>/etc/resolv.conf`.
 
 ### Usage
 
@@ -92,6 +96,27 @@ In case SELinux is enabled, please update the BabelNet index security context: `
 docker run --rm -it -v './BabelNet-3.7:/babelnet/index' -v './output:/babelnet/output' nlpub/babelnet babelnet-extract
 ```
 
-### Copyright
+## Citation
+
+Please cite BabelNet Extract if this software was useful for you.
+
+* [Ustalov, D.](//github.com/dustalov), [Panchenko, A.](//github.com/alexanderpanchenko): [A Tool for Effective Extraction of Synsets and Semantic Relations from BabelNet](https://doi.org/10.1109/SSDSE.2017.8071954). In: Proceedings of the 2017 Siberian Symposium on Data Science and Engineering ([SSDSE](http://ssdse.ieeesiberia.org/)). pp. 10–13. IEEE, Novosibirsk, Russia (2017).
+
+```bibtex
+@inproceedings{BabelNetExtract,
+  author    = {Ustalov, Dmitry and Panchenko, Alexander},
+  title     = {{A Tool for Effective Extraction of Synsets and Semantic Relations from BabelNet}},
+  booktitle = {Proceedings of the 2017 Siberian Symposium on Data Science and Engineering (SSDSE)},
+  year      = {2017},
+  pages     = {10--13},
+  isbn      = {978-1-5386-1593-5},
+  address   = {Novosibirsk, Russia},
+  publisher = {IEEE},
+  doi       = {10.1109/SSDSE.2017.8071954},
+  language  = {english},
+}
+```
+
+## Copyright
 
 [BabelNet](http://babelnet.org/) and its API are licensed under a [CC BY-NC-SA 3.0](https://creativecommons.org/licenses/by-nc-sa/3.0/) license. [BabelNet Extract](https://github.com/nlpub/babelnet-extract) is licensed under the Apache License 2.0.
